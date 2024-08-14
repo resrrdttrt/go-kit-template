@@ -3,18 +3,23 @@ package main
 import (
 	"fmt"
 	"log"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"go-kit-template/admin"
+	thgrpcapi "go-kit-template/admin/api/grpc"
+	thhttpapi "go-kit-template/admin/api/http"
+	"go-kit-template/admin/postgres"
+	"go-kit-template/pkg/common"
+	"go-kit-template/pkg/db"
+	"go-kit-template/pkg/logger"
+	pb "go-kit-template/proto"
+
 	"github.com/jmoiron/sqlx"
-	"github.com/resrrdttrt/VOU/admin"
-	thhttpapi "github.com/resrrdttrt/VOU/admin/api/http"
-	"github.com/resrrdttrt/VOU/admin/postgres"
-	"github.com/resrrdttrt/VOU/pkg/common"
-	"github.com/resrrdttrt/VOU/pkg/db"
-	"github.com/resrrdttrt/VOU/pkg/logger"
+	"google.golang.org/grpc"
 )
 
 const (
@@ -45,6 +50,7 @@ type config struct {
 	logLevel string
 	dbConfig postgres.Config
 	httpPort string
+	grpcPort string
 }
 
 func loadConfig() config {
@@ -94,6 +100,10 @@ func main() {
 	svc := newService(logging, rdb, wdb)
 	errs := make(chan error)
 	go startHTTPServer(thhttpapi.MakeHandler(svc), cfg, logging, make(chan error))
+
+	grpcsrv := newGPRCService(logging, rdb, wdb)
+	go startGRPCServer(thgrpcapi.NewServerRepository(grpcsrv), cfg, logging, make(chan error))
+
 	go func() {
 		c := make(chan os.Signal, 1)
 		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
@@ -113,10 +123,30 @@ func newService(logger logger.Logger, rdb *sqlx.DB, wdb *sqlx.DB) admin.Service 
 	return svc
 }
 
+func newGPRCService(logger logger.Logger, rdb *sqlx.DB, wdb *sqlx.DB) admin.GRPCService {
+	database := db.NewReadWrite(rdb, wdb)
+	mathRepo := postgres.NewMathRepository(database,logger)
+	svc := admin.NewGRPCService(logger, mathRepo)
+	return svc
+}
+
 func startHTTPServer(handler http.Handler, cfg config, logger logger.Logger, errs chan error) {
 	p := fmt.Sprintf(":%s", cfg.httpPort)
 	logger.Info(fmt.Sprintf("HTTP service start using http on %s", p))
 	errs <- http.ListenAndServe(p, handler)
+}
+
+func startGRPCServer(srv pb.MathServiceServer, cfg config, logger logger.Logger, errs chan error) {
+	p := fmt.Sprintf(":%s", cfg.grpcPort)
+	logger.Info(fmt.Sprintf("gRPC service start using http on %s", p))
+	lis, err := net.Listen("tcp", p)
+	if err != nil {
+		errs <- err
+		return
+	}
+	s := grpc.NewServer() // default config
+	pb.RegisterMathServiceServer(s, srv)
+	errs <- s.Serve(lis)
 }
 
 func connectToDBRead(dbConfig postgres.Config, logger logger.Logger) *sqlx.DB {

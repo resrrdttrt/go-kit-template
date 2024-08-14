@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	log "github.com/resrrdttrt/VOU/pkg/logger"
+	log "go-kit-template/pkg/logger"
 )
 
 type adminService struct {
@@ -56,13 +56,13 @@ type authService interface {
 	GetUserRoleByID(userID string) (string, error)
 }
 
+
 func NewAdminService(log log.Logger, users UserRepository, statistic StatisticRepository, auth AuthRepository) Service {
 	return &adminService{
 		log:       log,
 		users:     users,
 		statistic: statistic,
 		auth:      auth,
-
 	}
 }
 
@@ -157,4 +157,26 @@ func (s *adminService) GetUserIDByAccessToken(accessToken string) (string, error
 
 func (s *adminService) GetUserRoleByID(userID string) (string, error) {
 	return s.auth.GetUserRoleByID(userID)
+}
+
+
+type GRPCService interface {
+	// GRPC
+	Add(ctx context.Context, numA, numB float32)(sum float32,err error)
+}
+
+type grpcService struct {
+	log log.Logger
+	math MathRepository
+}
+
+func NewGRPCService(log log.Logger, math MathRepository) GRPCService {
+	return &grpcService{
+		log: log,
+		math: math,
+	}
+}
+
+func (s *grpcService) Add(ctx context.Context, numA, numB float32) (float32, error) {
+	return s.math.Add(ctx, numA, numB)
 }

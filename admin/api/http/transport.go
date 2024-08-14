@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/resrrdttrt/VOU/admin"
-	"github.com/resrrdttrt/VOU/middlewares"
-	"github.com/resrrdttrt/VOU/pkg/errors"
+	"go-kit-template/admin"
+	"go-kit-template/middlewares"
+	"go-kit-template/pkg/errors"
 
 	kithttp "github.com/go-kit/kit/transport/http"
 	"github.com/go-zoo/bone"

@@ -3,10 +3,10 @@ package postgres
 import (
 	"context"
 
-	"github.com/resrrdttrt/VOU/admin"
-	"github.com/resrrdttrt/VOU/pkg/db"
-	"github.com/resrrdttrt/VOU/pkg/errors"
-	log "github.com/resrrdttrt/VOU/pkg/logger"
+	"go-kit-template/admin"
+	"go-kit-template/pkg/db"
+	"go-kit-template/pkg/errors"
+	log "go-kit-template/pkg/logger"
 )
 
 var _ admin.UserRepository = (*usersRepository)(nil)

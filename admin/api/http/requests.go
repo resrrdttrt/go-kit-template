@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"time"
 
+	"go-kit-template/pkg/errors"
+
 	"github.com/google/uuid"
-	"github.com/resrrdttrt/VOU/pkg/errors"
 )
 
 var (

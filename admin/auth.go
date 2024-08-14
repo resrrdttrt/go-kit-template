@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	"github.com/resrrdttrt/VOU/pkg/common"
+	"go-kit-template/pkg/common"
 )
 
 var DB *sql.DB

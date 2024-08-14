@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/resrrdttrt/VOU/admin"
+	"go-kit-template/admin"
 )
 
 func VerifyRoleMiddleware(next http.Handler) http.Handler {

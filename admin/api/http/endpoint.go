@@ -3,9 +3,10 @@ package http
 import (
 	"context"
 
+	"go-kit-template/admin"
+	"go-kit-template/pkg/common"
+
 	"github.com/go-kit/kit/endpoint"
-	"github.com/resrrdttrt/VOU/admin"
-	"github.com/resrrdttrt/VOU/pkg/common"
 )
 
 func getAllUsersEndpoint(svc admin.Service) endpoint.Endpoint {

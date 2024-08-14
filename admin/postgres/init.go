@@ -4,9 +4,10 @@ import (
 	"database/sql"
 	"fmt"
 
+	"go-kit-template/pkg/errors"
+
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq" // required for SQL access
-	"github.com/resrrdttrt/VOU/pkg/errors"
 	migrate "github.com/rubenv/sql-migrate"
 )
 
