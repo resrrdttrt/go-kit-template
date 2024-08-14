@@ -1,0 +1,489 @@
+{
+	"info": {
+		"_postman_id": "e5a8fde8-dc3a-4544-884d-626309721730",
+		"name": "APITest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36713886",
+		"_collection_link": "https://cam-mysafe.postman.co/workspace/Team-Workspace~774dba3b-8202-4492-82b3-3a5312729dca/collection/36713886-e5a8fde8-dc3a-4544-884d-626309721730?action=share&source=collection_link&creator=36713886"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GetAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/user",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/user/{{user_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Hung\",\n    \"username\": \"minhhk1\",\n    \"password\": \"securepassword123\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"+1234567890\",\n    \"role\": \"enterprise\",\n    \"status\": \"active\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/admin/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Minh\",\n    \"username\": \"minhhk1\",\n    \"password\": \"securepassword123\",\n    \"email\": \"john.doe@example.com\",\n    \"phone\": \"+1234567890\",\n    \"role\": \"enterprise\",\n    \"status\": \"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:{{port}}/admin/user/{{user_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"user",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/user/{{user_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"user",
+								"{{user_id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ActiveUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/user/active/{{user_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"user",
+								"active",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeactiveUser",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/user/deactive/{{user_id}}",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"user",
+								"deactive",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statistic",
+			"item": [
+				{
+					"name": "GetTotalUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_users",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTotalGames",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_games",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTotalEnterprise",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_enterprises",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_enterprises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTotalEndUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_end_users",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_end_users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTotalActiveEndUsers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_active_end_users",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_active_end_users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTotalActiveEnterprises",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_active_enterprises",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_active_enterprises"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTotalNewEnterprisesInTime (skip)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_new_enterprises_in_time",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_new_enterprises_in_time"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTotalNewEndUsersInTime (skip)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_new_end_users_in_time",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_new_end_users_in_time"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTotalNewEndUsersInWeek",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_new_end_users_in_week",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_new_end_users_in_week"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTotalNewEnterprisesInWeek",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:{{port}}/admin/statistic/total_new_enterprises_in_week",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"admin",
+								"statistic",
+								"total_new_enterprises_in_week"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
