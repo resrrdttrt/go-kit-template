@@ -3,7 +3,6 @@ package http
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"go-kit-template/admin"
@@ -128,16 +127,7 @@ func MakeAdminHandler(svc admin.Service) http.Handler {
 }
 
 func encodeResponse(_ context.Context, w http.ResponseWriter, response interface{}) error {
-	if ar, ok := response.(Response); ok {
-		fmt.Println(ar)
-		for k, v := range ar.Headers() {
-			w.Header().Set(k, v)
-		}
-		w.WriteHeader(ar.Code())
-		if ar.Empty() {
-			return nil
-		}
-	}
+	w.Header().Set("Content-Type", "application/json")
 	return json.NewEncoder(w).Encode(response)
 }
 
